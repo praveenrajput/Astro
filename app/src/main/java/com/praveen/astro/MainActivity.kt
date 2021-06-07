@@ -3,7 +3,6 @@ package com.praveen.astro
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,21 +20,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.praveen.astro.api.AstrosApi
-import com.praveen.astro.data.network.ktorHttpClient
 import com.praveen.astro.models.Astros
 import com.praveen.astro.models.People
 import com.praveen.astro.ui.theme.AstroTheme
 import com.praveen.astro.viewModels.AstrosViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val astrosViewModel: AstrosViewModel by viewModels()
+    private val astrosViewModel: AstrosViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,18 +39,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        CoroutineScope(Dispatchers.IO).launch {
-            val astrosApi = AstrosApi(client = ktorHttpClient)
-            val response = astrosApi.getAstrosKtor()
-            withContext(Dispatchers.Main) {
-                astrosViewModel.onListCahange(response)
-            }
-        }
+        astrosViewModel.getAstrosList()
     }
 }
 
 @Composable
-fun AstrosList(astrosViewModel: AstrosViewModel = viewModel()) {
+fun AstrosList(astrosViewModel: AstrosViewModel) {
     val astrosList: Astros by astrosViewModel.astrosLiveData.observeAsState(Astros())
     LazyColumn {
         items(astrosList.people) {
