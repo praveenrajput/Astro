@@ -3,16 +3,17 @@ plugins {
     id("kotlin-android")
     id("kotlinx-serialization")
     id("koin")
+    id("com.squareup.sqldelight")
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     buildToolsVersion = "31.0.0 rc4"
 
     defaultConfig {
         applicationId = "com.praveen.astro"
         minSdk = 21
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
 
@@ -47,26 +48,27 @@ android {
 
     dependencies {
 
-        implementation("androidx.core:core-ktx:1.5.0")
-        implementation("androidx.appcompat:appcompat:1.3.0")
-        implementation("com.google.android.material:material:1.3.0")
+        implementation(AndroidX.core.ktx)
+        implementation(AndroidX.appCompat)
+        implementation(Google.android.material)
         implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
         implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
         implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
-        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha06")
-        implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta08")
-        implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-        implementation("androidx.activity:activity-compose:1.3.0-beta01")
-        implementation("io.insert-koin:koin-android:3.0.2")
-        implementation("io.ktor:ktor:1.6.0")
-        implementation("io.ktor:ktor-client-android:1.6.0")
-        implementation("io.ktor:ktor-client-serialization:1.6.0")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
-        implementation("io.ktor:ktor-client-logging-jvm:1.6.0")
+        implementation(AndroidX.lifecycle.viewModelCompose)
+        implementation("androidx.compose.runtime:runtime-livedata:${rootProject.extra["compose_version"]}")
+        implementation(AndroidX.lifecycle.runtimeKtx)
+        implementation(AndroidX.activity.compose)
+        implementation(Koin.android)
+        implementation("io.ktor:ktor:${rootProject.extra["ktor_version"]}")
+        implementation("io.ktor:ktor-client-android:${rootProject.extra["ktor_version"]}")
+        implementation("io.ktor:ktor-client-serialization:${rootProject.extra["ktor_version"]}")
+        implementation(KotlinX.serialization.json)
+        implementation("io.ktor:ktor-client-logging-jvm:${rootProject.extra["ktor_version"]}")
+        implementation(Square.sqlDelight.drivers.android)
 
-        testImplementation("junit:junit:4.13.2")
-        androidTestImplementation("androidx.test.ext:junit:1.1.2")
-        androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+        testImplementation(Testing.junit4)
+        androidTestImplementation(AndroidX.test.ext.junit)
+        androidTestImplementation(AndroidX.test.espresso.core)
         androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
     }
 }
