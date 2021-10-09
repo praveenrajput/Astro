@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.praveen.astro.models.Astros
 import com.praveen.astro.models.People
 import com.praveen.astro.ui.theme.AstroTheme
 import com.praveen.astro.viewModels.AstrosViewModel
@@ -39,15 +38,14 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        astrosViewModel.getAstrosList()
     }
 }
 
 @Composable
 fun AstrosList(astrosViewModel: AstrosViewModel) {
-    val astrosList: Astros by astrosViewModel.astrosLiveData.observeAsState(Astros())
+    val astrosList by astrosViewModel.peopleLiveData.observeAsState(listOf())
     LazyColumn {
-        items(astrosList.people) {
+        items(astrosList) {
             AstrosDetail(people = it)
         }
     }

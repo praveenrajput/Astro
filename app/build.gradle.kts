@@ -57,6 +57,7 @@ android {
         implementation(AndroidX.lifecycle.viewModelCompose)
         implementation("androidx.compose.runtime:runtime-livedata:${rootProject.extra["compose_version"]}")
         implementation(AndroidX.lifecycle.runtimeKtx)
+        implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-rc01")
         implementation(AndroidX.activity.compose)
         implementation(Koin.android)
         implementation("io.ktor:ktor:${rootProject.extra["ktor_version"]}")
@@ -65,6 +66,7 @@ android {
         implementation(KotlinX.serialization.json)
         implementation("io.ktor:ktor-client-logging-jvm:${rootProject.extra["ktor_version"]}")
         implementation(Square.sqlDelight.drivers.android)
+        implementation("com.squareup.sqldelight:coroutines-extensions-jvm:_")
 
         testImplementation(Testing.junit4)
         androidTestImplementation(AndroidX.test.ext.junit)

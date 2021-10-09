@@ -4,21 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.praveen.astro.api.AstrosApi
-import com.praveen.astro.models.Astros
+import com.praveen.astro.data.repository.AstroRepository
+import com.praveen.astro.models.People
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class AstrosViewModel(
-    private val astrosApi: AstrosApi
+    private val astroRepository: AstroRepository
 ) : ViewModel() {
-    private val _astros = MutableLiveData<Astros>()
-    val astrosLiveData: LiveData<Astros> = _astros
+    private var _people = MutableLiveData<List<People>>()
+    val peopleLiveData: LiveData<List<People>> = _people
 
-    fun onListChange(astros: Astros) {
-        _astros.value = astros
-    }
-
-    fun getAstrosList() = viewModelScope.launch {
-        _astros.value = astrosApi.fetchAstros()
+    init {
+        viewModelScope.launch {
+            astroRepository.getPeople().collect {
+                _people.value = it
+            }
+        }
     }
 }
