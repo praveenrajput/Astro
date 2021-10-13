@@ -10,17 +10,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.praveen.astro.models.BottomNavItem
 import com.praveen.astro.models.People
+import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
 import com.praveen.astro.viewModels.AstrosViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,10 +44,66 @@ class MainActivity : ComponentActivity() {
         setContent {
             AstroTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    AstrosList(astrosViewModel)
+                val navController = rememberNavController()
+                Scaffold(
+                    bottomBar = {
+                        BottomNavigationBar(
+                            items = listOf(
+                                BottomNavItem(
+                                    name = "Astros",
+                                    route = "astros",
+                                    icon = Icons.Default.Person
+                                ),
+                                BottomNavItem(
+                                    name = "ISS Location",
+                                    route = "issLocation",
+                                    icon = Icons.Default.LocationOn
+                                )
+                            ),
+                            navController = navController,
+                            onItemClick = {
+                                navController.navigate(it.route)
+                            }
+                        )
+                    }
+                ) {
+                    Navigation(
+                        navController = navController,
+                        astrosViewModel = astrosViewModel
+                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun BottomNavigationBar(
+    items: List<BottomNavItem>,
+    navController: NavController,
+    modifier: Modifier = Modifier,
+    onItemClick: (BottomNavItem) -> Unit
+) {
+    val backStackEntry = navController.currentBackStackEntryAsState()
+    BottomNavigation(
+        modifier = modifier,
+        backgroundColor = Color.Gray,
+        elevation = 4.dp
+    ) {
+        items.forEach { item ->
+            val selected = item.route == backStackEntry.value?.destination?.route
+            BottomNavigationItem(
+                selected = selected,
+                onClick = { onItemClick(item) },
+                icon = {
+                    Icon(
+                        imageVector = item.icon,
+                        contentDescription = item.name
+                    )
+                },
+                selectedContentColor = Color.Blue,
+                unselectedContentColor = Color.White
+            )
         }
     }
 }
