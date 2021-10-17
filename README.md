@@ -12,4 +12,4 @@ A demo app, showing current people in space, using Jetpack compose, and Koin bas
 - [Ktor](https://ktor.io/docs/http-client-engines.html#jvm-android) for making http network request.
 - [SQLDelight](https://cashapp.github.io/sqldelight/) for generating typesafe kotlin APIs for SQL statements.
 
-Astro is stil under development.
+Astro is still under development.
