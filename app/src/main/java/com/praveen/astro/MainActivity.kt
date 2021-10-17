@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.praveen.astro.models.BottomNavItem
+import com.praveen.astro.models.IssNow
 import com.praveen.astro.models.People
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
@@ -139,8 +140,29 @@ fun AstrosDetail(people: People) {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun ISSDetails(astrosViewModel: AstrosViewModel) {
+    val issNow by astrosViewModel.issNowLiveData.observeAsState(IssNow())
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(15.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = issNow.issPosition.latitude,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = issNow.issPosition.longitude,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = issNow.timestamp.toString(),
+            textAlign = TextAlign.Center
+        )
+    }
 }
 
 @Preview(showBackground = true)

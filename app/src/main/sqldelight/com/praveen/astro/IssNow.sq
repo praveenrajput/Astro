@@ -1,0 +1,22 @@
+import com.praveen.astro.models.IssPosition;
+
+CREATE TABLE IssNow(
+    issPosition TEXT AS IssPosition NOT NULL,
+    timeStamp INTEGER NOT NULL
+);
+
+insert:
+INSERT INTO IssNow(issPosition, timeStamp)
+VALUES (?, ?);
+
+insertIssPosition:
+INSERT INTO IssNow(issPosition, timeStamp)
+VALUES ?;
+
+deleteAll:
+DELETE FROM IssNow;
+
+selectIssPosition:
+SELECT *
+FROM IssNow;
+
