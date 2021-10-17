@@ -34,6 +34,7 @@ import com.praveen.astro.models.IssNow
 import com.praveen.astro.models.People
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
+import com.praveen.astro.utils.getFormattedTime
 import com.praveen.astro.viewModels.AstrosViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -159,7 +160,7 @@ fun ISSDetails(astrosViewModel: AstrosViewModel) {
             textAlign = TextAlign.Center
         )
         Text(
-            text = issNow.timestamp.toString(),
+            text = getFormattedTime(issNow.timestamp),
             textAlign = TextAlign.Center
         )
     }
