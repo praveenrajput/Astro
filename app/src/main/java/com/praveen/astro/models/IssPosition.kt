@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class IssPosition(
     @SerialName("latitude")
-    val latitude: String = "",
+    val latitude: String = "0",
     @SerialName("longitude")
-    val longitude: String = ""
+    val longitude: String = "0"
 )

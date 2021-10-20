@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -19,23 +21,37 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.android.libraries.maps.CameraUpdateFactory
+import com.google.android.libraries.maps.MapView
+import com.google.android.libraries.maps.model.LatLng
+import com.google.maps.android.ktx.addMarker
+import com.google.maps.android.ktx.awaitMap
+import com.praveen.astro.location.rememberMapViewWithLifecycle
 import com.praveen.astro.models.BottomNavItem
 import com.praveen.astro.models.IssNow
+import com.praveen.astro.models.IssPosition
 import com.praveen.astro.models.People
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
 import com.praveen.astro.utils.getFormattedTime
 import com.praveen.astro.viewModels.AstrosViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -141,9 +157,24 @@ fun AstrosDetail(people: People) {
 }
 
 @Composable
-fun ISSDetails(astrosViewModel: AstrosViewModel) {
+fun IssLocation(astrosViewModel: AstrosViewModel) {
     val issNow by astrosViewModel.issNowLiveData.observeAsState(IssNow())
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(5.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        IssDetails(issNow = issNow)
+        MapView(issNow.issPosition)
+    }
+}
+
+@Composable
+fun IssDetails(
+    issNow: IssNow
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -163,6 +194,41 @@ fun ISSDetails(astrosViewModel: AstrosViewModel) {
             text = getFormattedTime(issNow.timestamp),
             textAlign = TextAlign.Center
         )
+    }
+}
+
+@Composable
+private fun MapView(
+    position: IssPosition
+) {
+    val mapView = rememberMapViewWithLifecycle()
+    MapViewContainer(map = mapView, issPosition = position)
+}
+
+@Composable
+private fun MapViewContainer(
+    map: MapView,
+    issPosition: IssPosition
+) {
+    var mapState by remember(map) { mutableStateOf(false) }
+    LaunchedEffect(map, mapState) {
+        if (!mapState) {
+            val googleMapView = map.awaitMap()
+            val position = LatLng(issPosition.latitude.toDouble(), issPosition.longitude.toDouble())
+            googleMapView.addMarker {
+                title("ISS")
+                position(position)
+            }
+            googleMapView.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 3f))
+            mapState = true
+        }
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+    AndroidView({ map }) { mapView ->
+        coroutineScope.launch {
+            mapView.awaitMap()
+        }
     }
 }
 

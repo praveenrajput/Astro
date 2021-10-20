@@ -21,6 +21,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        manifestPlaceholders["MAPS_API_KEY"] = properties["MAPS_API_KEY"] ?: ""
     }
 
     buildTypes {
@@ -70,6 +72,10 @@ android {
         implementation("io.ktor:ktor-client-logging-jvm:${rootProject.extra["ktor_version"]}")
         implementation(Square.sqlDelight.drivers.android)
         implementation("com.squareup.sqldelight:coroutines-extensions-jvm:_")
+
+        implementation("com.google.android.libraries.maps:maps:3.1.0-beta")
+        implementation("com.google.maps.android:maps-v3-ktx:2.2.0")
+        implementation("com.android.volley:volley:1.2.0")
 
         testImplementation(Testing.junit4)
         androidTestImplementation(AndroidX.test.ext.junit)

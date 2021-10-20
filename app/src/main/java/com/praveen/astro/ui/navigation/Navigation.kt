@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.praveen.astro.AstrosList
-import com.praveen.astro.ISSDetails
+import com.praveen.astro.IssLocation
 import com.praveen.astro.viewModels.AstrosViewModel
 
 @Composable
@@ -16,7 +16,7 @@ fun Navigation(navController: NavHostController, astrosViewModel: AstrosViewMode
         }
 
         composable("issLocation") {
-            ISSDetails(astrosViewModel = astrosViewModel)
+            IssLocation(astrosViewModel = astrosViewModel)
         }
     }
 }
