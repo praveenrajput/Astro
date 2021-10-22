@@ -211,23 +211,27 @@ private fun MapViewContainer(
     issPosition: IssPosition
 ) {
     var mapState by remember(map) { mutableStateOf(false) }
+
+    val position = remember(issPosition) {
+        LatLng(issPosition.latitude.toDouble(), issPosition.longitude.toDouble())
+    }
+
     LaunchedEffect(map, mapState) {
         if (!mapState) {
-            val googleMapView = map.awaitMap()
-            val position = LatLng(issPosition.latitude.toDouble(), issPosition.longitude.toDouble())
-            googleMapView.addMarker {
-                title("ISS")
-                position(position)
-            }
-            googleMapView.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 3f))
+            map.awaitMap()
             mapState = true
         }
     }
-
     val coroutineScope = rememberCoroutineScope()
     AndroidView({ map }) { mapView ->
         coroutineScope.launch {
-            mapView.awaitMap()
+            val googleMap = mapView.awaitMap()
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 3f))
+
+            googleMap.addMarker {
+                title("ISS")
+                position(position)
+            }
         }
     }
 }
