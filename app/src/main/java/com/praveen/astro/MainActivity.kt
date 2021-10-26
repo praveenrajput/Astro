@@ -228,6 +228,7 @@ private fun MapViewContainer(
             val googleMap = mapView.awaitMap()
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 3f))
 
+            googleMap.clear()
             googleMap.addMarker {
                 title("ISS")
                 position(position)
