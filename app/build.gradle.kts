@@ -4,6 +4,7 @@ plugins {
     id("kotlinx-serialization")
     id("koin")
     id("com.squareup.sqldelight")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -21,8 +22,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-
-        manifestPlaceholders["MAPS_API_KEY"] = properties["MAPS_API_KEY"] ?: ""
     }
 
     buildTypes {
