@@ -45,8 +45,13 @@ class AstroRepository(
     suspend fun getPeople(): Flow<List<People>> {
         refreshPeople()
         return astrosQueries.selectAstros(
-            mapper = { name, craft ->
-                People(name = name, craft = craft)
+            mapper = { name, craft, personBio, personImageUrl ->
+                People(
+                    name = name,
+                    craft = craft,
+                    personBio = personBio,
+                    personImageUrl = personImageUrl
+                )
             }
         ).asFlow().mapToList()
     }
@@ -57,7 +62,7 @@ class AstroRepository(
             astrosQueries.transaction {
                 astrosQueries.deleteAll()
                 astrosData.people.forEach {
-                    astrosQueries.insert(it.name, it.craft)
+                    astrosQueries.insert(it.name, it.craft, it.personBio, it.personImageUrl)
                 }
             }
         } catch (e: UnknownHostException) {

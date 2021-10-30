@@ -58,6 +58,8 @@ android {
         implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
         implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
         implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
+        implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-rc01")
+
         implementation(AndroidX.lifecycle.viewModelCompose)
         implementation("androidx.compose.runtime:runtime-livedata:${rootProject.extra["compose_version"]}")
         implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
@@ -72,6 +74,8 @@ android {
         implementation("io.ktor:ktor-client-logging-jvm:${rootProject.extra["ktor_version"]}")
         implementation(Square.sqlDelight.drivers.android)
         implementation("com.squareup.sqldelight:coroutines-extensions-jvm:_")
+
+        implementation("io.coil-kt:coil-compose:1.4.0")
 
         implementation("com.google.android.libraries.maps:maps:3.1.0-beta")
         implementation("com.google.maps.android:maps-v3-ktx:2.2.0")

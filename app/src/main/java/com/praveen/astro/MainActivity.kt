@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,7 +32,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
@@ -46,7 +46,7 @@ import com.praveen.astro.location.rememberMapViewWithLifecycle
 import com.praveen.astro.models.BottomNavItem
 import com.praveen.astro.models.IssNow
 import com.praveen.astro.models.IssPosition
-import com.praveen.astro.models.People
+import com.praveen.astro.ui.astros.AstroItem
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
 import com.praveen.astro.utils.getFormattedTime
@@ -86,8 +86,9 @@ class MainActivity : ComponentActivity() {
                     }
                 ) {
                     Navigation(
+                        paddingValues = it,
                         navController = navController,
-                        astrosViewModel = astrosViewModel
+                        astrosViewModel = astrosViewModel,
                     )
                 }
             }
@@ -127,43 +128,31 @@ fun BottomNavigationBar(
 }
 
 @Composable
-fun AstrosList(astrosViewModel: AstrosViewModel) {
+fun AstrosList(
+    paddingValues: PaddingValues,
+    astrosViewModel: AstrosViewModel
+) {
     val astrosList by astrosViewModel.peopleLiveData.observeAsState(listOf())
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier.padding(paddingValues)
+    ) {
         items(astrosList) {
-            AstrosDetail(people = it)
+            AstroItem(people = it)
         }
     }
 }
 
 @Composable
-fun AstrosDetail(people: People) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(15.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = people.name,
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = people.craft,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-fun IssLocation(astrosViewModel: AstrosViewModel) {
+fun IssLocation(
+    paddingValues: PaddingValues,
+    astrosViewModel: AstrosViewModel
+) {
     val issNow by astrosViewModel.issNowLiveData.observeAsState(IssNow())
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(5.dp),
+            .padding(paddingValues),
         verticalArrangement = Arrangement.Center
     ) {
         IssDetails(issNow = issNow)
@@ -234,13 +223,5 @@ private fun MapViewContainer(
                 position(position)
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    AstroTheme {
-        AstrosDetail(people = People("name", "ii"))
     }
 }

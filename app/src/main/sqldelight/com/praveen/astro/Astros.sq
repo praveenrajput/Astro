@@ -1,14 +1,16 @@
 CREATE TABLE People (
   name TEXT PRIMARY KEY,
-  craft TEXT NOT NULL
+  craft TEXT NOT NULL,
+  personBio TEXT NOT NULL,
+  personImageUrl TEXT NOT NULL
 );
 
 insert:
-INSERT INTO People(name, craft)
-VALUES ( ?, ?);
+INSERT INTO People(name, craft, personBio, personImageUrl)
+VALUES ( ?, ?, ?, ?);
 
 insertAstro:
-INSERT INTO People(name, craft)
+INSERT INTO People(name, craft, personBio, personImageUrl)
 VALUES ?;
 
 deleteAll:
