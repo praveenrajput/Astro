@@ -7,7 +7,7 @@ import io.ktor.client.request.get
 
 class AstrosApi(
     private val client: HttpClient,
-    private val baseUrl: String = "http://api.open-notify.org"
+    private val baseUrl: String = "https://people-in-space-proxy.ew.r.appspot.com/"
 ) {
     suspend fun fetchAstros() = client.get<Astros>("$baseUrl/astros.json")
     suspend fun fetchIssPosition() = client.get<IssNow>("$baseUrl/iss-now.json")

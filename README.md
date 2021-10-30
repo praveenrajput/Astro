@@ -13,6 +13,8 @@ A demo app, showing current people in space, using Jetpack compose, and Koin bas
 - [SQLDelight](https://cashapp.github.io/sqldelight/) for generating typesafe kotlin APIs for SQL statements.
 - [Google Maps](https://developers.google.com/maps/documentation/android-sdk/overview/) for showing current location of ISS.
 
+It uses api used in [People in Space](https://github.com/joreilly/PeopleInSpace) to show list of people in space and current position of the ISS.
+
 ## Google Maps SDK
 
 For google map to work, add API key in the `local.properties` file as below
