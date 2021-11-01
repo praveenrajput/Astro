@@ -1,6 +1,13 @@
 # Astro
 A demo app, showing current people in space, using Jetpack compose, and Koin based on modern Android tech-stacks and MVVM architecture. Fecthing data from the network and integrating peristed data in the database.
 
+## Screenshots
+<p align="center">
+  <img alt="Astronauts screen" src="screens/astronauts.jpg" width="45%">
+&nbsp;
+  <img alt="ISS Position screen" src="screens/issPosition.jpg" width="45%">
+</p>
+
 ## Tech & Open-source libraries used
 - [Kotlin](https://kotlinlang.org/) + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - [Koin](https://insert-koin.io/) for dependency injection.
@@ -8,7 +15,7 @@ A demo app, showing current people in space, using Jetpack compose, and Koin bas
    - Compose - A modern toolkit for building native Android UI.
    - ViewModel - storing and managing UI-related data in a lifecycle conscious way.
 - Architecture
-   - MVVM Architecture (Delarative View - ViewModel - Model)
+   - MVVM Architecture (Declarative View - ViewModel - Model)
 - [Ktor](https://ktor.io/docs/http-client-engines.html#jvm-android) for making http network request.
 - [SQLDelight](https://cashapp.github.io/sqldelight/) for generating typesafe kotlin APIs for SQL statements.
 - [Google Maps](https://developers.google.com/maps/documentation/android-sdk/overview/) for showing current location of ISS.
