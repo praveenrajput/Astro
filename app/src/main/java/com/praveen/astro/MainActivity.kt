@@ -57,17 +57,22 @@ class MainActivity : ComponentActivity() {
                                 BottomNavItem(
                                     name = "Astros",
                                     route = "astros",
-                                    icon = Icons.Default.Person
+                                    icon = Icons.Default.Person,
+                                    popUpto = "issLocation"
                                 ),
                                 BottomNavItem(
                                     name = "ISS Location",
                                     route = "issLocation",
-                                    icon = Icons.Default.LocationOn
+                                    icon = Icons.Default.LocationOn,
+                                    popUpto = "astros"
                                 )
                             ),
                             navController = navController,
                             onItemClick = {
-                                navController.navigate(it.route)
+                                navController.navigate(it.route) {
+                                    launchSingleTop = true
+                                    popUpTo(it.popUpto) { inclusive = true }
+                                }
                             }
                         )
                     }
