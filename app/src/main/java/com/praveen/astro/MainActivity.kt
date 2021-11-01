@@ -31,8 +31,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -49,6 +52,7 @@ import com.praveen.astro.models.IssPosition
 import com.praveen.astro.ui.astros.AstroItem
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
+import com.praveen.astro.ui.theme.FontLato
 import com.praveen.astro.utils.getFormattedTime
 import com.praveen.astro.viewModels.AstrosViewModel
 import kotlinx.coroutines.launch
@@ -133,11 +137,23 @@ fun AstrosList(
     astrosViewModel: AstrosViewModel
 ) {
     val astrosList by astrosViewModel.peopleLiveData.observeAsState(listOf())
-    LazyColumn(
+    Column(
         modifier = Modifier.padding(paddingValues)
     ) {
-        items(astrosList) {
-            AstroItem(people = it)
+        Text(
+            modifier = Modifier.padding(20.dp),
+            text = "Astronauts",
+            style = TextStyle(
+                fontFamily = FontLato,
+                fontWeight = FontWeight.Bold,
+                fontSize = 25.sp,
+                color = Color.Black
+            )
+        )
+        LazyColumn {
+            items(astrosList) {
+                AstroItem(people = it)
+            }
         }
     }
 }

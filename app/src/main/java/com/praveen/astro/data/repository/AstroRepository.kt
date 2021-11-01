@@ -42,8 +42,7 @@ class AstroRepository(
         }
     }
 
-    suspend fun getPeople(): Flow<List<People>> {
-        refreshPeople()
+    fun getPeople(): Flow<List<People>> {
         return astrosQueries.selectAstros(
             mapper = { name, craft, personBio, personImageUrl ->
                 People(
@@ -56,7 +55,7 @@ class AstroRepository(
         ).asFlow().mapToList()
     }
 
-    private suspend fun refreshPeople() {
+    suspend fun refreshPeople() {
         try {
             val astrosData = astrosApi.fetchAstros()
             astrosQueries.transaction {

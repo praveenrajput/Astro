@@ -31,5 +31,9 @@ class AstrosViewModel(
                 _issNow.value = it
             }
         }
+
+        viewModelScope.launch {
+            astroRepository.refreshPeople()
+        }
     }
 }
