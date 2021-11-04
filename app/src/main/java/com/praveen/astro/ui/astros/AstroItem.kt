@@ -2,6 +2,7 @@ package com.praveen.astro.ui.astros
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,7 +30,7 @@ import com.praveen.astro.ui.theme.LightGrey
 import com.praveen.astro.ui.theme.cardBackground
 
 @Composable
-fun AstroItem(people: People) {
+fun AstroItem(people: People, onItemClick: (String) -> Unit) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,6 +38,11 @@ fun AstroItem(people: People) {
             .padding(10.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(cardBackground)
+            .clickable(
+                onClick = {
+                    onItemClick(people.name)
+                }
+            )
     ) {
         val (astroImage, astroName, spaceCraft) = createRefs()
         createVerticalChain(astroName, spaceCraft, chainStyle = ChainStyle.Packed(4F))

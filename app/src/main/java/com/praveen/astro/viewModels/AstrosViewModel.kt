@@ -19,6 +19,15 @@ class AstrosViewModel(
     private var _issNow = MutableLiveData<IssNow>()
     val issNowLiveData: LiveData<IssNow> = _issNow
 
+    private var _peopleWithName = MutableLiveData<People>()
+    val peopleWithName: LiveData<People> = _peopleWithName
+
+    fun loadAstroWithName(name: String) = viewModelScope.launch {
+        astroRepository.getPeopleWithName(name).collect {
+            _peopleWithName.value = it
+        }
+    }
+
     init {
         viewModelScope.launch {
             astroRepository.getPeople().collect {

@@ -36,6 +36,13 @@ val Typography = Typography(
         letterSpacing = 0.15.sp,
         color = Color.Black
     ),
+    h4 = TextStyle(
+        fontFamily = FontLato,
+        fontWeight = FontWeight.Bold,
+        fontSize = 28.sp,
+        letterSpacing = 0.15.sp,
+        color = Color.Black
+    )
 
     /* Other default text styles to override
     button = TextStyle(

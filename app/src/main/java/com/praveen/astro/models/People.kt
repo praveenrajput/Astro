@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class People(
     @SerialName("craft")
-    val craft: String,
+    val craft: String = "",
     @SerialName("name")
-    val name: String,
+    val name: String = "",
     @SerialName("personBio")
     val personBio: String = "",
     @SerialName("personImageUrl")
     val personImageUrl: String = ""
-)
+) : java.io.Serializable

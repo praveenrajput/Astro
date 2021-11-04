@@ -19,3 +19,8 @@ DELETE FROM People;
 selectAstros:
 SELECT *
 FROM People;
+
+selectAstro:
+SELECT *
+FROM People
+WHERE name = ?;
