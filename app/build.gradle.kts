@@ -80,7 +80,8 @@ android {
         implementation("com.google.maps.android:maps-v3-ktx:2.2.0")
         implementation("com.android.volley:volley:1.2.0")
 
-        testImplementation("com.squareup.okhttp3:mockwebserver:4.9.2")
+        testImplementation("io.ktor:ktor-client-mock:${rootProject.extra["ktor_version"]}")
+
         testImplementation("com.squareup.sqldelight:sqlite-driver:1.5.2")
 
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
