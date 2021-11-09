@@ -24,6 +24,14 @@ android {
         }
     }
 
+    kotlin {
+        sourceSets {
+            all {
+                languageSettings.optIn("kotlin.RequiresOptIn")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -46,6 +54,12 @@ android {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     dependencies {
@@ -81,11 +95,17 @@ android {
         implementation("com.android.volley:volley:1.2.0")
 
         testImplementation("io.ktor:ktor-client-mock:${rootProject.extra["ktor_version"]}")
+        testImplementation("io.insert-koin:koin-test-junit4:3.1.2")
+        testImplementation("io.insert-koin:koin-test:3.1.2")
 
         testImplementation("com.squareup.sqldelight:sqlite-driver:1.5.2")
 
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
         testImplementation("com.google.truth:truth:1.1.3")
+        testImplementation("org.robolectric:robolectric:4.7-alpha-2")
+        testImplementation("org.mockito:mockito-core:4.0.0")
+        testImplementation("androidx.arch.core:core-testing:2.1.0")
+        testImplementation("androidx.test:core:1.4.1-alpha03")
 
         testImplementation(Testing.junit4)
         androidTestImplementation(AndroidX.test.ext.junit)

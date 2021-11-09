@@ -24,10 +24,17 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
+fun initKoin(koinAppDeclaration: KoinAppDeclaration = {}) =
+    startKoin {
+        koinAppDeclaration()
+    }
+
 @ExperimentalSerializationApi
-fun applicationModule(enableLogging: Boolean) = module {
+fun applicationModule(enableLogging: Boolean = false) = module {
     single { provideJson() }
     single { provideHttpClient(get(), enableLogging = enableLogging) }
     single { provideAstrosApi(get()) }
