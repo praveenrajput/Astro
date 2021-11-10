@@ -35,6 +35,7 @@ import com.praveen.astro.ui.issPosition.IssDetails
 import com.praveen.astro.ui.issPosition.MapView
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
+import com.praveen.astro.utils.AstroScreen
 import com.praveen.astro.viewModels.AstrosViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -138,7 +139,7 @@ fun AstrosList(
         modifier = Modifier.padding(paddingValues)
     ) {
         ScreenTitle(
-            title = "Astronauts",
+            title = AstroScreen.Astros.title,
             modifier = Modifier
                 .padding(20.dp)
         )
@@ -167,7 +168,7 @@ fun IssLocation(
         verticalArrangement = Arrangement.Center
     ) {
         ScreenTitle(
-            title = "ISS Position",
+            title = AstroScreen.IssPosition.title,
             modifier = Modifier
                 .padding(20.dp)
 

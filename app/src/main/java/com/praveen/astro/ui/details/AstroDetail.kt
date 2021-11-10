@@ -26,6 +26,7 @@ import coil.compose.rememberImagePainter
 import com.praveen.astro.models.People
 import com.praveen.astro.ui.common.ScreenTitle
 import com.praveen.astro.ui.theme.FontLato
+import com.praveen.astro.utils.AstroScreen
 import com.praveen.astro.viewModels.AstrosViewModel
 
 @Composable
@@ -43,7 +44,7 @@ fun AstroDetail(
         val (title, astroImage, name, astroDetails) = createRefs()
 
         ScreenTitle(
-            title = "Astronaut Details",
+            title = AstroScreen.Details.title,
             modifier = Modifier
                 .padding(20.dp)
                 .constrainAs(title) {}

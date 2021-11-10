@@ -62,6 +62,14 @@ android {
         }
     }
 
+    packagingOptions {
+        resources {
+            excludes.add(
+                "META-INF/**"
+            )
+        }
+    }
+
     dependencies {
 
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
@@ -111,5 +119,8 @@ android {
         androidTestImplementation(AndroidX.test.ext.junit)
         androidTestImplementation(AndroidX.test.espresso.core)
         androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
+        androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
+
+        debugImplementation("androidx.compose.ui:ui-test-manifest:${rootProject.extra["compose_version"]}")
     }
 }
