@@ -17,12 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
+import com.praveen.astro.misc.AstroDetailTag
 import com.praveen.astro.models.People
 import com.praveen.astro.ui.common.ScreenTitle
 import com.praveen.astro.ui.theme.FontLato
@@ -39,6 +41,7 @@ fun AstroDetail(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
+            .testTag(AstroDetailTag)
     ) {
 
         val (title, astroImage, name, astroDetails) = createRefs()
