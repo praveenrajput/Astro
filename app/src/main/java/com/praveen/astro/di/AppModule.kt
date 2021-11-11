@@ -2,12 +2,11 @@ package com.praveen.astro.di
 
 import android.content.Context
 import android.util.Log
-import com.praveen.astro.AstrosQueries
 import com.praveen.astro.Database
 import com.praveen.astro.IssNow
-import com.praveen.astro.IssNowQueries
 import com.praveen.astro.data.network.api.AstrosApi
 import com.praveen.astro.data.repository.AstroRepository
+import com.praveen.astro.data.repository.AstrosRepositoryInterface
 import com.praveen.astro.models.IssPosition
 import com.praveen.astro.viewModels.AstrosViewModel
 import com.squareup.sqldelight.ColumnAdapter
@@ -42,15 +41,12 @@ fun applicationModule(enableLogging: Boolean = false) = module {
     single { provideDatabase(get()) }
     single { provideAstrosQueries(get()) }
     single { provideIssNowQueries(get()) }
-    single { provideAstroRepository(get(), get(), get()) }
+    single { provideAstroRepository() }
     viewModel { AstrosViewModel(get()) }
 }
 
-fun provideAstroRepository(
-    astrosApi: AstrosApi,
-    astrosQueries: AstrosQueries,
-    issNowQueries: IssNowQueries
-) = AstroRepository(astrosApi, astrosQueries, issNowQueries)
+fun provideAstroRepository(): AstrosRepositoryInterface =
+    AstroRepository()
 
 fun provideDriver(context: Context) = AndroidSqliteDriver(
     schema = Database.Schema,

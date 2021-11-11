@@ -10,15 +10,24 @@ import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import com.squareup.sqldelight.runtime.coroutines.mapToOne
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.net.UnknownHostException
 
-class AstroRepository(
-    private val astrosApi: AstrosApi,
-    private val astrosQueries: AstrosQueries,
-    private val issNowQueries: IssNowQueries
-) {
+interface AstrosRepositoryInterface {
+    suspend fun getIssNow(): Flow<IssNow>
+    fun getPeopleWithName(astroName: String): Flow<People>
+    fun getPeople(): Flow<List<People>>
+    suspend fun refreshPeople()
+}
 
-    suspend fun getIssNow(): Flow<IssNow> {
+class AstroRepository : KoinComponent, AstrosRepositoryInterface {
+
+    private val astrosApi: AstrosApi by inject()
+    private val astrosQueries: AstrosQueries by inject()
+    private val issNowQueries: IssNowQueries by inject()
+
+    override suspend fun getIssNow(): Flow<IssNow> {
         refreshIssNow()
         return issNowQueries.selectIssPosition(
             mapper = { issPosition, timeStamp ->
@@ -42,7 +51,7 @@ class AstroRepository(
         }
     }
 
-    fun getPeopleWithName(astroName: String): Flow<People> {
+    override fun getPeopleWithName(astroName: String): Flow<People> {
         return astrosQueries.selectAstro(
             astroName,
             mapper = { name, craft, personBio, personImageUrl ->
@@ -56,7 +65,7 @@ class AstroRepository(
         ).asFlow().mapToOne()
     }
 
-    fun getPeople(): Flow<List<People>> {
+    override fun getPeople(): Flow<List<People>> {
         return astrosQueries.selectAstros(
             mapper = { name, craft, personBio, personImageUrl ->
                 People(
@@ -69,7 +78,7 @@ class AstroRepository(
         ).asFlow().mapToList()
     }
 
-    suspend fun refreshPeople() {
+    override suspend fun refreshPeople() {
         try {
             val astrosData = astrosApi.fetchAstros()
             astrosQueries.transaction {
