@@ -14,6 +14,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -25,10 +29,16 @@ import com.google.android.libraries.maps.model.LatLng
 import com.google.maps.android.ktx.addMarker
 import com.google.maps.android.ktx.awaitMap
 import com.praveen.astro.location.rememberMapViewWithLifecycle
+import com.praveen.astro.misc.IssDetailTag
+import com.praveen.astro.misc.IssPositionKey
+import com.praveen.astro.misc.MapViewTag
 import com.praveen.astro.models.IssNow
 import com.praveen.astro.models.IssPosition
 import com.praveen.astro.utils.getFormattedTime
 import kotlinx.coroutines.launch
+
+val IssPositionSemanticKey = SemanticsPropertyKey<IssPosition>(IssPositionKey)
+var SemanticsPropertyReceiver.currentIssPosition by IssPositionSemanticKey
 
 @Composable
 fun IssDetails(
@@ -39,6 +49,7 @@ fun IssDetails(
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(10.dp)
+            .testTag(IssDetailTag)
     ) {
         val (lat, lon, lastUpdated, latValue, lonValue, lastUpdatedValue) = createRefs()
         createHorizontalChain(lat, lon, lastUpdated, chainStyle = ChainStyle.Spread)
@@ -146,7 +157,12 @@ private fun MapViewContainer(
         }
     }
     val coroutineScope = rememberCoroutineScope()
-    AndroidView({ map }) { mapView ->
+    AndroidView(
+        { map },
+        modifier = Modifier
+            .testTag(MapViewTag)
+            .semantics { currentIssPosition = issPosition }
+    ) { mapView ->
         coroutineScope.launch {
             val googleMap = mapView.awaitMap()
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 3f))

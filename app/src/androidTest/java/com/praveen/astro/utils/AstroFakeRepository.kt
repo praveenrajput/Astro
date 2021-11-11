@@ -13,7 +13,7 @@ class AstroFakeRepository : AstrosRepositoryInterface {
         People("Test Craft1", "Test Name1"),
     )
 
-    private val issPosition = IssNow(
+    val issPosition = IssNow(
         issPosition = IssPosition("15.15", "30.30")
     )
 
