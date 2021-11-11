@@ -22,11 +22,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.praveen.astro.misc.AstrosListTag
 import com.praveen.astro.models.BottomNavItem
 import com.praveen.astro.models.IssNow
 import com.praveen.astro.ui.astros.AstroItem
@@ -143,7 +145,9 @@ fun AstrosList(
             modifier = Modifier
                 .padding(20.dp)
         )
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier.testTag(AstrosListTag)
+        ) {
             items(astrosList) {
                 AstroItem(
                     people = it,
