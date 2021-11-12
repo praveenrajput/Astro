@@ -13,18 +13,20 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.serialization.ExperimentalSerializationApi
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class LocalDatabaseTest {
+    private lateinit var driver: JdbcSqliteDriver
     private lateinit var astrosQueries: AstrosQueries
     private lateinit var issNowQueries: IssNowQueries
 
     @ExperimentalSerializationApi
     @Before
     fun setUp() {
-        val driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
         val database = Database(
             driver,
             IssNow.Adapter(
@@ -34,6 +36,11 @@ class LocalDatabaseTest {
         Database.Schema.create(driver)
         astrosQueries = database.astrosQueries
         issNowQueries = database.issNowQueries
+    }
+
+    @After
+    fun tearDown() {
+        driver.close()
     }
 
     @Test
