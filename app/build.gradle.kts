@@ -70,6 +70,12 @@ android {
         }
     }
 
+    tasks.withType<Test> {
+        testLogging {
+            events("started", "passed", "skipped", "failed")
+        }
+    }
+
     dependencies {
 
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
