@@ -9,7 +9,7 @@ plugins {
 
 android {
     compileSdk = 31
-    buildToolsVersion = "31.0.0 rc4"
+    buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = "com.praveen.astro"
