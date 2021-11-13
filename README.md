@@ -1,11 +1,17 @@
 # Astro
+[![Android CI](https://github.com/praveenrajput/Astro/actions/workflows/android%20ci.yml/badge.svg)](https://github.com/praveenrajput/Astro/actions/workflows/android%20ci.yml)
+[![Unit test CI](https://github.com/praveenrajput/Astro/actions/workflows/unit%20test.yml/badge.svg)](https://github.com/praveenrajput/Astro/actions/workflows/unit%20test.yml)
+[![Instrumentation Test CI](https://github.com/praveenrajput/Astro/actions/workflows/instsrumentation%20test.yml/badge.svg)](https://github.com/praveenrajput/Astro/actions/workflows/instsrumentation%20test.yml)
+
 A demo app, showing current people in space, using Jetpack compose, and Koin based on modern Android tech-stacks and MVVM architecture. Fecthing data from the network and integrating peristed data in the database.
 
 ## Screenshots
 <p align="center">
-  <img alt="Astronauts screen" src="screens/astronauts.jpg" width="45%">
+  <img alt="Astronauts screen" src="screens/astronauts.jpg" width="32%">
 &nbsp;
-  <img alt="ISS Position screen" src="screens/issPosition.jpg" width="45%">
+  <img alt="ISS Position screen" src="screens/issPosition.jpg" width="32%">
+&nbsp;
+  <img alt="ISS Position screen" src="screens/astronaut_details.jpg" width="32%">
 </p>
 
 ## Tech & Open-source libraries used
@@ -28,6 +34,4 @@ For google map to work, add API key in the `local.properties` file as below
 >  MAPS_API_KEY=API_KEY
 
 Read [documentation](https://developers.google.com/maps/documentation/android-sdk/get-api-key) to generate a key.
-
-Astro is still under development.
 
