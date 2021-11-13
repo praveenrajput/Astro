@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -38,10 +40,14 @@ fun AstroDetail(
 ) {
     astrosViewModel.loadAstroWithName(astroName)
     val details by astrosViewModel.peopleWithName.observeAsState(People())
+    val scrollState = rememberScrollState(0)
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
             .testTag(AstroDetailTag)
+            .verticalScroll(
+                scrollState
+            )
     ) {
 
         val (title, astroImage, name, astroDetails) = createRefs()
