@@ -15,8 +15,8 @@ android {
         applicationId = "com.praveen.astro"
         minSdk = 21
         targetSdk = 31
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -77,7 +77,6 @@ android {
     }
 
     dependencies {
-
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
         implementation(AndroidX.core.ktx)
         implementation(AndroidX.appCompat)
@@ -85,13 +84,13 @@ android {
         implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
         implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
         implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
-        implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-rc01")
+        implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02")
 
         implementation(AndroidX.lifecycle.viewModelCompose)
         implementation("androidx.compose.runtime:runtime-livedata:${rootProject.extra["compose_version"]}")
-        implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
+        implementation("androidx.navigation:navigation-compose:2.4.0-beta02")
         implementation(AndroidX.lifecycle.runtimeKtx)
-        implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-rc01")
+        implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
         implementation(AndroidX.activity.compose)
         implementation(Koin.android)
         implementation("io.ktor:ktor:${rootProject.extra["ktor_version"]}")
@@ -106,7 +105,7 @@ android {
 
         implementation("com.google.android.libraries.maps:maps:3.1.0-beta")
         implementation("com.google.maps.android:maps-v3-ktx:2.2.0")
-        implementation("com.android.volley:volley:1.2.0")
+        implementation("com.android.volley:volley:1.2.1")
 
         testImplementation("io.ktor:ktor-client-mock:${rootProject.extra["ktor_version"]}")
         testImplementation("io.insert-koin:koin-test-junit4:3.1.2")
@@ -114,7 +113,7 @@ android {
 
         testImplementation("com.squareup.sqldelight:sqlite-driver:1.5.2")
 
-        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
+        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
         testImplementation("com.google.truth:truth:1.1.3")
         testImplementation("org.robolectric:robolectric:4.7-alpha-2")
         testImplementation("org.mockito:mockito-core:4.0.0")
