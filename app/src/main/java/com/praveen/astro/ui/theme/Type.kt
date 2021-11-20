@@ -33,15 +33,13 @@ val Typography = Typography(
         fontFamily = FontLato,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
-        letterSpacing = 0.15.sp,
-        color = Color.Black
+        letterSpacing = 0.15.sp
     ),
     h4 = TextStyle(
         fontFamily = FontLato,
         fontWeight = FontWeight.Bold,
         fontSize = 28.sp,
-        letterSpacing = 0.15.sp,
-        color = Color.Black
+        letterSpacing = 0.15.sp
     )
 
     /* Other default text styles to override

@@ -20,8 +20,7 @@ fun ScreenTitle(
         style = TextStyle(
             fontFamily = FontLato,
             fontWeight = FontWeight.Bold,
-            fontSize = 25.sp,
-            color = Color.Black
+            fontSize = 25.sp
         )
     )
 }

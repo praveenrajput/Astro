@@ -3,6 +3,7 @@ package com.praveen.astro
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,8 +23,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.isDebugInspectorInfoEnabled
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -37,6 +40,8 @@ import com.praveen.astro.ui.issPosition.IssDetails
 import com.praveen.astro.ui.issPosition.MapView
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.theme.AstroTheme
+import com.praveen.astro.ui.theme.LightWhite
+import com.praveen.astro.ui.theme.Purple200
 import com.praveen.astro.utils.AstroScreen
 import com.praveen.astro.viewModels.AstrosViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,6 +53,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AstroTheme {
+                SetStatusBarColor()
                 // A surface container using the 'background' color from the theme
                 val navController = rememberNavController()
                 Scaffold(
@@ -91,6 +97,18 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    @Composable
+    private fun SetStatusBarColor() {
+        this.window.statusBarColor = ContextCompat.getColor(
+            this,
+            if (isSystemInDarkTheme()) {
+                R.color.black
+            } else {
+                R.color.white
+            }
+        )
+    }
 }
 
 @Composable
@@ -109,7 +127,6 @@ fun BottomNavigationBar(
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
         modifier = modifier,
-        backgroundColor = Color.White,
         elevation = 4.dp
     ) {
         items.forEach { item ->
@@ -123,7 +140,11 @@ fun BottomNavigationBar(
                         contentDescription = item.name
                     )
                 },
-                selectedContentColor = Color.Black,
+                selectedContentColor = if (isSystemInDarkTheme()) {
+                    Color.White
+                } else {
+                    Color.Black
+                },
                 unselectedContentColor = Color.Gray
             )
         }

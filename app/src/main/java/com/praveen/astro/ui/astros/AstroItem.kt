@@ -3,6 +3,7 @@ package com.praveen.astro.ui.astros
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,9 +26,10 @@ import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import com.praveen.astro.models.People
+import com.praveen.astro.ui.theme.DarkGrey
 import com.praveen.astro.ui.theme.FontLato
 import com.praveen.astro.ui.theme.LightGrey
-import com.praveen.astro.ui.theme.cardBackground
+import com.praveen.astro.ui.theme.LightWhite
 
 @Composable
 fun AstroItem(people: People, onItemClick: (String) -> Unit) {
@@ -37,7 +39,13 @@ fun AstroItem(people: People, onItemClick: (String) -> Unit) {
             .wrapContentHeight()
             .padding(10.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(cardBackground)
+            .background(
+                if(isSystemInDarkTheme()) {
+                    DarkGrey
+                } else {
+                    LightWhite
+                }
+            )
             .clickable(
                 onClick = {
                     onItemClick(people.name)
