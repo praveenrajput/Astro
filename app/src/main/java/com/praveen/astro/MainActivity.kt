@@ -103,7 +103,7 @@ class MainActivity : ComponentActivity() {
         this.window.statusBarColor = ContextCompat.getColor(
             this,
             if (isSystemInDarkTheme()) {
-                R.color.black
+                R.color.darkGrey
             } else {
                 R.color.white
             }
