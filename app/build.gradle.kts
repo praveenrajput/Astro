@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 32
     buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = "com.praveen.astro"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 32
         versionCode = 2
         versionName = "1.1.0"
 
@@ -125,6 +125,6 @@ android {
         androidTestImplementation(AndroidX.test.espresso.core)
         androidTestImplementation(AndroidX.compose.ui.testJunit4)
 
-        debugImplementation(AndroidX.compose.ui.test)
+        debugImplementation(AndroidX.compose.ui.testManifest)
     }
 }
