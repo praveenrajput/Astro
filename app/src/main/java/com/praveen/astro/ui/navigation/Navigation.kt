@@ -18,18 +18,18 @@ fun Navigation(
     navController: NavHostController,
     astrosViewModel: AstrosViewModel
 ) {
-    NavHost(navController = navController, startDestination = "astros") {
-        composable("astros") {
+    NavHost(navController = navController, startDestination = NavigationRoute.ASTROS) {
+        composable(NavigationRoute.ASTROS) {
             AstrosList(
                 paddingValues = paddingValues,
                 astrosViewModel = astrosViewModel,
                 onItemClick = {
-                    navController.navigate("astrosDetails/$it")
+                    navController.navigate("${NavigationRoute.ASTROS_DETAIL}/$it")
                 }
             )
         }
 
-        composable("issLocation") {
+        composable(NavigationRoute.ISS_LOCATION) {
             IssLocation(
                 paddingValues = paddingValues,
                 astrosViewModel = astrosViewModel
@@ -37,7 +37,7 @@ fun Navigation(
         }
 
         composable(
-            "astrosDetails/{astroName}",
+            "${NavigationRoute.ASTROS_DETAIL}/{astroName}",
             arguments = listOf(navArgument("astroName") { type = NavType.StringType })
         ) {
             val astroName = it.arguments?.getString("astroName")

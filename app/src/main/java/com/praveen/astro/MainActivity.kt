@@ -39,6 +39,7 @@ import com.praveen.astro.ui.common.ScreenTitle
 import com.praveen.astro.ui.issPosition.IssDetails
 import com.praveen.astro.ui.issPosition.MapView
 import com.praveen.astro.ui.navigation.Navigation
+import com.praveen.astro.ui.navigation.NavigationRoute
 import com.praveen.astro.ui.theme.AstroTheme
 import com.praveen.astro.ui.theme.LightWhite
 import com.praveen.astro.ui.theme.Purple200
@@ -59,20 +60,20 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     bottomBar = {
                         if (
-                            currentRoute(navController) == "issLocation" ||
-                            currentRoute(navController) == "astros"
+                            currentRoute(navController) == NavigationRoute.ISS_LOCATION ||
+                            currentRoute(navController) == NavigationRoute.ASTROS
                         ) {
                             BottomNavigationBar(
                                 items = listOf(
                                     BottomNavItem(
                                         name = "Astros",
-                                        route = "astros",
+                                        route = NavigationRoute.ASTROS,
                                         icon = Icons.Default.Person,
                                         popUpto = "issLocation"
                                     ),
                                     BottomNavItem(
                                         name = "ISS Location",
-                                        route = "issLocation",
+                                        route = NavigationRoute.ISS_LOCATION,
                                         icon = Icons.Default.LocationOn,
                                         popUpto = "astros"
                                     )
@@ -91,7 +92,7 @@ class MainActivity : ComponentActivity() {
                     Navigation(
                         paddingValues = it,
                         navController = navController,
-                        astrosViewModel = astrosViewModel,
+                        astrosViewModel = astrosViewModel
                     )
                 }
             }
