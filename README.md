@@ -1,7 +1,7 @@
 # Astro
 [![Android CI](https://github.com/praveenrajput/Astro/actions/workflows/android%20ci.yml/badge.svg)](https://github.com/praveenrajput/Astro/actions/workflows/android%20ci.yml)
 [![Unit test CI](https://github.com/praveenrajput/Astro/actions/workflows/unit%20test.yml/badge.svg)](https://github.com/praveenrajput/Astro/actions/workflows/unit%20test.yml)
-[![Instrumentation Test CI](https://github.com/praveenrajput/Astro/actions/workflows/instsrumentation%20test.yml/badge.svg)](https://github.com/praveenrajput/Astro/actions/workflows/instsrumentation%20test.yml)
+[![Instrumentation Test CI](https://github.com/praveenrajput/Astro/actions/workflows/instrumentation%20test.yml/badge.svg)](https://github.com/praveenrajput/Astro/actions/workflows/instrumentation%20test.yml)
 
 A demo app, showing the current list of people in the space, using Jetpack compose, and Koin, based on modern Android tech-stacks and MVVM architecture. Fecthing data from the network and integrating persisted data in the database.
 
