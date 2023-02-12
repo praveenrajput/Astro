@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.2.2")
+        classpath("com.android.tools.build:gradle:7.4.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
         classpath("org.jetbrains.kotlin:kotlin-serialization:1.7.10")
         classpath("io.insert-koin:koin-gradle-plugin:3.2.0")
