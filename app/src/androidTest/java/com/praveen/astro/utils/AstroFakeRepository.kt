@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.flowOf
 class AstroFakeRepository : AstrosRepositoryInterface {
     val astros = listOf(
         People("Test Craft", "Test Name"),
-        People("Test Craft1", "Test Name1"),
+        People("Test Craft1", "Test Name1")
     )
 
     val issPosition = IssNow(
         issPosition = IssPosition("15.15", "30.30")
     )
 
-    override suspend fun getIssNow(): Flow<IssNow> {
+    override fun getIssNow(): Flow<IssNow> {
         return flowOf(issPosition)
     }
 
@@ -30,5 +30,8 @@ class AstroFakeRepository : AstrosRepositoryInterface {
     }
 
     override suspend fun refreshPeople() {
+    }
+
+    override suspend fun refreshIss() {
     }
 }
