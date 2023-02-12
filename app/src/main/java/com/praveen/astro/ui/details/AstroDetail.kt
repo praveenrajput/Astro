@@ -13,8 +13,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import com.praveen.astro.misc.AstroDetailTag
-import com.praveen.astro.models.People
 import com.praveen.astro.ui.common.ScreenTitle
 import com.praveen.astro.ui.theme.FontLato
 import com.praveen.astro.utils.AstroScreen
@@ -39,7 +38,7 @@ fun AstroDetail(
     astrosViewModel: AstrosViewModel
 ) {
     astrosViewModel.loadAstroWithName(astroName)
-    val details by astrosViewModel.peopleWithName.observeAsState(People())
+    val details by astrosViewModel.astroWithNameFlow.collectAsState()
     val scrollState = rememberScrollState(0)
     ConstraintLayout(
         modifier = Modifier
@@ -49,7 +48,6 @@ fun AstroDetail(
                 scrollState
             )
     ) {
-
         val (title, astroImage, name, astroDetails) = createRefs()
 
         ScreenTitle(

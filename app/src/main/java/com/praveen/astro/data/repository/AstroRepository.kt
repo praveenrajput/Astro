@@ -15,10 +15,11 @@ import org.koin.core.component.inject
 import java.net.UnknownHostException
 
 interface AstrosRepositoryInterface {
-    suspend fun getIssNow(): Flow<IssNow>
+    fun getIssNow(): Flow<IssNow>
     fun getPeopleWithName(astroName: String): Flow<People>
     fun getPeople(): Flow<List<People>>
     suspend fun refreshPeople()
+    suspend fun refreshIss()
 }
 
 class AstroRepository : KoinComponent, AstrosRepositoryInterface {
@@ -27,28 +28,12 @@ class AstroRepository : KoinComponent, AstrosRepositoryInterface {
     private val astrosQueries: AstrosQueries by inject()
     private val issNowQueries: IssNowQueries by inject()
 
-    override suspend fun getIssNow(): Flow<IssNow> {
-        refreshIssNow()
+    override fun getIssNow(): Flow<IssNow> {
         return issNowQueries.selectIssPosition(
             mapper = { issPosition, timeStamp ->
                 IssNow(issPosition = issPosition, timestamp = timeStamp)
             }
         ).asFlow().mapToOne()
-    }
-
-    private suspend fun refreshIssNow() {
-        try {
-            val issNowData = astrosApi.fetchIssPosition()
-            issNowQueries.transaction {
-                issNowQueries.deleteAll()
-                issNowQueries.insert(
-                    issNowData.issPosition,
-                    issNowData.timestamp
-                )
-            }
-        } catch (e: UnknownHostException) {
-            Log.d("Astros Repo", e.toString())
-        }
     }
 
     override fun getPeopleWithName(astroName: String): Flow<People> {
@@ -86,6 +71,21 @@ class AstroRepository : KoinComponent, AstrosRepositoryInterface {
                 astrosData.people.forEach {
                     astrosQueries.insert(it.name, it.craft, it.personBio, it.personImageUrl)
                 }
+            }
+        } catch (e: UnknownHostException) {
+            Log.d("Astros Repo", e.toString())
+        }
+    }
+
+    override suspend fun refreshIss() {
+        try {
+            val issNowData = astrosApi.fetchIssPosition()
+            issNowQueries.transaction {
+                issNowQueries.deleteAll()
+                issNowQueries.insert(
+                    issNowData.issPosition,
+                    issNowData.timestamp
+                )
             }
         } catch (e: UnknownHostException) {
             Log.d("Astros Repo", e.toString())

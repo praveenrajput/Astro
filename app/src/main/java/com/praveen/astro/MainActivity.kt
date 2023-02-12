@@ -19,11 +19,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.isDebugInspectorInfoEnabled
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -41,8 +40,6 @@ import com.praveen.astro.ui.issPosition.MapView
 import com.praveen.astro.ui.navigation.Navigation
 import com.praveen.astro.ui.navigation.NavigationRoute
 import com.praveen.astro.ui.theme.AstroTheme
-import com.praveen.astro.ui.theme.LightWhite
-import com.praveen.astro.ui.theme.Purple200
 import com.praveen.astro.utils.AstroScreen
 import com.praveen.astro.viewModels.AstrosViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -158,7 +155,7 @@ fun AstrosList(
     astrosViewModel: AstrosViewModel,
     onItemClick: (String) -> Unit
 ) {
-    val astrosList by astrosViewModel.peopleLiveData.observeAsState(listOf())
+    val astrosList by astrosViewModel.peopleFlow.collectAsState(initial = listOf())
     Column(
         modifier = Modifier.padding(paddingValues)
     ) {
@@ -185,7 +182,7 @@ fun IssLocation(
     paddingValues: PaddingValues,
     astrosViewModel: AstrosViewModel
 ) {
-    val issNow by astrosViewModel.issNowLiveData.observeAsState(IssNow())
+    val issNow by astrosViewModel.issNowFlow.collectAsState(initial = IssNow())
 
     Column(
         modifier = Modifier

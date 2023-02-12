@@ -87,10 +87,8 @@ android {
         implementation(AndroidX.constraintLayout.compose)
 
         implementation(AndroidX.lifecycle.viewModelCompose)
-        implementation(AndroidX.compose.runtime.liveData)
         implementation(AndroidX.navigation.compose)
         implementation(AndroidX.lifecycle.runtimeKtx)
-        implementation(AndroidX.lifecycle.liveDataKtx)
         implementation(AndroidX.activity.compose)
         implementation(Koin.android)
         implementation(Ktor.io)
