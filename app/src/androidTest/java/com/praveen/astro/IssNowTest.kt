@@ -24,7 +24,6 @@ class IssNowTest {
 
     @Test
     fun testIssNowDetail() {
-
         composeTestRule.setContent {
             IssDetails(
                 issNow = issNow

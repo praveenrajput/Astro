@@ -30,8 +30,10 @@ class AstroFakeRepository : AstrosRepositoryInterface {
     }
 
     override suspend fun refreshPeople() {
+        // no implementation needed
     }
 
     override suspend fun refreshIss() {
+        // no implementation needed
     }
 }
