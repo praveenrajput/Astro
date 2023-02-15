@@ -16,7 +16,7 @@ import com.praveen.astro.viewModels.AstrosViewModel
 fun Navigation(
     paddingValues: PaddingValues,
     navController: NavHostController,
-    astrosViewModel: AstrosViewModel
+    astrosViewModel: AstrosViewModel,
 ) {
     NavHost(navController = navController, startDestination = NavigationRoute.ASTROS) {
         composable(NavigationRoute.ASTROS) {
@@ -25,26 +25,26 @@ fun Navigation(
                 astrosViewModel = astrosViewModel,
                 onItemClick = {
                     navController.navigate("${NavigationRoute.ASTROS_DETAIL}/$it")
-                }
+                },
             )
         }
 
         composable(NavigationRoute.ISS_LOCATION) {
             IssLocation(
                 paddingValues = paddingValues,
-                astrosViewModel = astrosViewModel
+                astrosViewModel = astrosViewModel,
             )
         }
 
         composable(
             "${NavigationRoute.ASTROS_DETAIL}/{astroName}",
-            arguments = listOf(navArgument("astroName") { type = NavType.StringType })
+            arguments = listOf(navArgument("astroName") { type = NavType.StringType }),
         ) {
             val astroName = it.arguments?.getString("astroName")
             astroName?.let {
                 AstroDetail(
                     astroName = astroName,
-                    astrosViewModel = astrosViewModel
+                    astrosViewModel = astrosViewModel,
                 )
             }
         }

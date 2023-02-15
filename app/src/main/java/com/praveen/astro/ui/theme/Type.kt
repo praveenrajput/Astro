@@ -1,7 +1,6 @@
 package com.praveen.astro.ui.theme
 
 import androidx.compose.material.Typography
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -10,7 +9,7 @@ import androidx.compose.ui.unit.sp
 import com.praveen.astro.R
 
 val FontLato = FontFamily(
-    Font(R.font.lato)
+    Font(R.font.lato),
 )
 
 // Set of Material typography styles to start with
@@ -19,28 +18,28 @@ val Typography = Typography(
         fontFamily = FontLato,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        color = LightGrey
+        color = LightGrey,
     ),
 
     body2 = TextStyle(
         fontFamily = FontLato,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        color = LightGrey
+        color = LightGrey,
     ),
 
     h6 = TextStyle(
         fontFamily = FontLato,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
-        letterSpacing = 0.15.sp
+        letterSpacing = 0.15.sp,
     ),
     h4 = TextStyle(
         fontFamily = FontLato,
         fontWeight = FontWeight.Bold,
         fontSize = 28.sp,
-        letterSpacing = 0.15.sp
-    )
+        letterSpacing = 0.15.sp,
+    ),
 
     /* Other default text styles to override
     button = TextStyle(

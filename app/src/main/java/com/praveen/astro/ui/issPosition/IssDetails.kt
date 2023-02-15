@@ -42,14 +42,14 @@ var SemanticsPropertyReceiver.currentIssPosition by IssPositionSemanticKey
 
 @Composable
 fun IssDetails(
-    issNow: IssNow
+    issNow: IssNow,
 ) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(10.dp)
-            .testTag(IssDetailTag)
+            .testTag(IssDetailTag),
     ) {
         val (lat, lon, lastUpdated, latValue, lonValue, lastUpdatedValue) = createRefs()
         createHorizontalChain(lat, lon, lastUpdated, chainStyle = ChainStyle.Spread)
@@ -61,7 +61,7 @@ fun IssDetails(
                 .constrainAs(lat) {},
             text = "Latitude",
             style = MaterialTheme.typography.h6,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         Text(
             modifier = Modifier
@@ -74,7 +74,7 @@ fun IssDetails(
                 },
             text = "Longitude",
             style = MaterialTheme.typography.h6,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         Text(
             modifier = Modifier
@@ -87,7 +87,7 @@ fun IssDetails(
                 },
             text = "Last updated",
             style = MaterialTheme.typography.h6,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         Text(
             modifier = Modifier
@@ -100,7 +100,7 @@ fun IssDetails(
                 },
             text = issNow.issPosition.latitude,
             style = MaterialTheme.typography.body2,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         Text(
             modifier = Modifier
@@ -113,7 +113,7 @@ fun IssDetails(
                 },
             text = issNow.issPosition.longitude,
             style = MaterialTheme.typography.body2,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         Text(
             modifier = Modifier
@@ -126,14 +126,14 @@ fun IssDetails(
                 },
             text = getFormattedTime(issNow.timestamp),
             style = MaterialTheme.typography.body2,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
     }
 }
 
 @Composable
 fun MapView(
-    position: IssPosition
+    position: IssPosition,
 ) {
     val mapView = rememberMapViewWithLifecycle()
     MapViewContainer(map = mapView, issPosition = position)
@@ -142,7 +142,7 @@ fun MapView(
 @Composable
 private fun MapViewContainer(
     map: MapView,
-    issPosition: IssPosition
+    issPosition: IssPosition,
 ) {
     var mapState by remember(map) { mutableStateOf(false) }
 
@@ -161,7 +161,7 @@ private fun MapViewContainer(
         { map },
         modifier = Modifier
             .testTag(MapViewTag)
-            .semantics { currentIssPosition = issPosition }
+            .semantics { currentIssPosition = issPosition },
     ) { mapView ->
         coroutineScope.launch {
             val googleMap = mapView.awaitMap()

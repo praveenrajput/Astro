@@ -40,17 +40,17 @@ fun AstroItem(people: People, onItemClick: (String) -> Unit) {
             .padding(10.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(
-                if(isSystemInDarkTheme()) {
+                if (isSystemInDarkTheme()) {
                     DarkGrey
                 } else {
                     LightWhite
-                }
+                },
             )
             .clickable(
                 onClick = {
                     onItemClick(people.name)
-                }
-            )
+                },
+            ),
     ) {
         val (astroImage, astroName, spaceCraft) = createRefs()
         createVerticalChain(astroName, spaceCraft, chainStyle = ChainStyle.Packed(4F))
@@ -59,13 +59,13 @@ fun AstroItem(people: People, onItemClick: (String) -> Unit) {
                 .size(80.dp)
                 .padding(8.dp)
                 .clip(RoundedCornerShape(16.dp))
-                .constrainAs(astroImage) {}
+                .constrainAs(astroImage) {},
         ) {
             Image(
                 painter = rememberImagePainter(people.personImageUrl),
                 contentDescription = "Astro",
                 modifier = Modifier.size(80.dp),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
         }
 
@@ -77,11 +77,11 @@ fun AstroItem(people: People, onItemClick: (String) -> Unit) {
                 .constrainAs(astroName) {
                     start.linkTo(astroImage.end)
                     centerVerticallyTo(astroImage)
-                }
+                },
         ) {
             Text(
                 text = people.name,
-                style = MaterialTheme.typography.h6
+                style = MaterialTheme.typography.h6,
             )
         }
 
@@ -91,12 +91,12 @@ fun AstroItem(people: People, onItemClick: (String) -> Unit) {
                 .wrapContentHeight()
                 .absolutePadding(
                     top = 4.dp,
-                    left = 10.dp
+                    left = 10.dp,
                 )
                 .constrainAs(spaceCraft) {
                     start.linkTo(astroName.start)
                     centerVerticallyTo(astroImage)
-                }
+                },
         ) {
             Text(
                 text = people.craft,
@@ -104,8 +104,8 @@ fun AstroItem(people: People, onItemClick: (String) -> Unit) {
                     fontFamily = FontLato,
                     fontWeight = FontWeight.Normal,
                     fontSize = 20.sp,
-                    color = LightGrey
-                )
+                    color = LightGrey,
+                ),
             )
         }
     }

@@ -51,7 +51,7 @@ fun provideAstroRepository(): AstrosRepositoryInterface =
 fun provideDriver(context: Context) = AndroidSqliteDriver(
     schema = Database.Schema,
     context = context,
-    name = "astros.db"
+    name = "astros.db",
 )
 
 @ExperimentalSerializationApi
@@ -59,8 +59,8 @@ fun provideDatabase(androidSqliteDriver: AndroidSqliteDriver) =
     Database(
         driver = androidSqliteDriver,
         IssNowAdapter = IssNow.Adapter(
-            issPositionAdapter = issPositionAdapter
-        )
+            issPositionAdapter = issPositionAdapter,
+        ),
     )
 
 fun provideAstrosQueries(database: Database) =

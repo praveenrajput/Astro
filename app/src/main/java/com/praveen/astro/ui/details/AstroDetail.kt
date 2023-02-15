@@ -35,7 +35,7 @@ import com.praveen.astro.viewModels.AstrosViewModel
 @Composable
 fun AstroDetail(
     astroName: String,
-    astrosViewModel: AstrosViewModel
+    astrosViewModel: AstrosViewModel,
 ) {
     astrosViewModel.loadAstroWithName(astroName)
     val details by astrosViewModel.astroWithNameFlow.collectAsState()
@@ -45,8 +45,8 @@ fun AstroDetail(
             .fillMaxSize()
             .testTag(AstroDetailTag)
             .verticalScroll(
-                scrollState
-            )
+                scrollState,
+            ),
     ) {
         val (title, astroImage, name, astroDetails) = createRefs()
 
@@ -54,7 +54,7 @@ fun AstroDetail(
             title = AstroScreen.Details.title,
             modifier = Modifier
                 .padding(20.dp)
-                .constrainAs(title) {}
+                .constrainAs(title) {},
         )
 
         Box(
@@ -66,7 +66,7 @@ fun AstroDetail(
                 .constrainAs(astroImage) {
                     top.linkTo(title.bottom)
                     centerHorizontallyTo(parent)
-                }
+                },
         ) {
             Image(
                 modifier = Modifier
@@ -74,7 +74,7 @@ fun AstroDetail(
                     .height(300.dp),
                 painter = rememberImagePainter(data = details.personImageUrl),
                 contentDescription = details.name,
-                contentScale = ContentScale.FillHeight
+                contentScale = ContentScale.FillHeight,
             )
         }
 
@@ -88,7 +88,7 @@ fun AstroDetail(
                     centerHorizontallyTo(astroImage)
                 },
             text = details.name,
-            style = MaterialTheme.typography.h4
+            style = MaterialTheme.typography.h4,
         )
 
         Text(
@@ -105,8 +105,8 @@ fun AstroDetail(
                 fontFamily = FontLato,
                 fontWeight = FontWeight.Normal,
                 fontSize = 20.sp,
-                color = Color.Gray
-            )
+                color = Color.Gray,
+            ),
         )
     }
 }

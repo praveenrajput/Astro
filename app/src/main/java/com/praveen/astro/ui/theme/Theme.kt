@@ -11,14 +11,14 @@ private val DarkColorPalette = darkColors(
     primary = Black,
     onPrimary = LightWhite,
     background = Black,
-    onBackground = LightWhite
+    onBackground = LightWhite,
 )
 
 private val LightColorPalette = lightColors(
     primary = Color.White,
     background = Color.White,
     onBackground = Black,
-    onPrimary = Black
+    onPrimary = Black,
     /* Other default colors to override
     background = Color.White,
     surface = Color.White,
@@ -41,6 +41,6 @@ fun AstroTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable(
         colors = colors,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
     )
 }

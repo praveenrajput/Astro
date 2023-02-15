@@ -1,15 +1,15 @@
 package com.praveen.astro.utils
 
 enum class AstroScreen(
-    val title: String
+    val title: String,
 ) {
     Astros(
-        title = "Astronauts"
+        title = "Astronauts",
     ),
     IssPosition(
-        title = "Iss Position"
+        title = "Iss Position",
     ),
     Details(
-        title = "Astronaut Details"
-    )
+        title = "Astronaut Details",
+    ),
 }

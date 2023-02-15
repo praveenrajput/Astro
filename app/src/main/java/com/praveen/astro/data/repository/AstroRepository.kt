@@ -32,7 +32,7 @@ class AstroRepository : KoinComponent, AstrosRepositoryInterface {
         return issNowQueries.selectIssPosition(
             mapper = { issPosition, timeStamp ->
                 IssNow(issPosition = issPosition, timestamp = timeStamp)
-            }
+            },
         ).asFlow().mapToOne()
     }
 
@@ -44,9 +44,9 @@ class AstroRepository : KoinComponent, AstrosRepositoryInterface {
                     name = name,
                     craft = craft,
                     personBio = personBio,
-                    personImageUrl = personImageUrl
+                    personImageUrl = personImageUrl,
                 )
-            }
+            },
         ).asFlow().mapToOne()
     }
 
@@ -57,9 +57,9 @@ class AstroRepository : KoinComponent, AstrosRepositoryInterface {
                     name = name,
                     craft = craft,
                     personBio = personBio,
-                    personImageUrl = personImageUrl
+                    personImageUrl = personImageUrl,
                 )
-            }
+            },
         ).asFlow().mapToList()
     }
 
@@ -84,7 +84,7 @@ class AstroRepository : KoinComponent, AstrosRepositoryInterface {
                 issNowQueries.deleteAll()
                 issNowQueries.insert(
                     issNowData.issPosition,
-                    issNowData.timestamp
+                    issNowData.timestamp,
                 )
             }
         } catch (e: UnknownHostException) {

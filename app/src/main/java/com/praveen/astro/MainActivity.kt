@@ -66,14 +66,14 @@ class MainActivity : ComponentActivity() {
                                         name = "Astros",
                                         route = NavigationRoute.ASTROS,
                                         icon = Icons.Default.Person,
-                                        popUpto = "issLocation"
+                                        popUpto = "issLocation",
                                     ),
                                     BottomNavItem(
                                         name = "ISS Location",
                                         route = NavigationRoute.ISS_LOCATION,
                                         icon = Icons.Default.LocationOn,
-                                        popUpto = "astros"
-                                    )
+                                        popUpto = "astros",
+                                    ),
                                 ),
                                 navController = navController,
                                 onItemClick = {
@@ -81,15 +81,15 @@ class MainActivity : ComponentActivity() {
                                         launchSingleTop = true
                                         popUpTo(it.popUpto) { inclusive = true }
                                     }
-                                }
+                                },
                             )
                         }
-                    }
+                    },
                 ) {
                     Navigation(
                         paddingValues = it,
                         navController = navController,
-                        astrosViewModel = astrosViewModel
+                        astrosViewModel = astrosViewModel,
                     )
                 }
             }
@@ -104,7 +104,7 @@ class MainActivity : ComponentActivity() {
                 R.color.darkGrey
             } else {
                 R.color.white
-            }
+            },
         )
     }
 }
@@ -120,12 +120,12 @@ fun BottomNavigationBar(
     items: List<BottomNavItem>,
     navController: NavController,
     modifier: Modifier = Modifier,
-    onItemClick: (BottomNavItem) -> Unit
+    onItemClick: (BottomNavItem) -> Unit,
 ) {
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
         modifier = modifier,
-        elevation = 4.dp
+        elevation = 4.dp,
     ) {
         items.forEach { item ->
             val selected = item.route == backStackEntry.value?.destination?.route
@@ -135,7 +135,7 @@ fun BottomNavigationBar(
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = item.name
+                        contentDescription = item.name,
                     )
                 },
                 selectedContentColor = if (isSystemInDarkTheme()) {
@@ -143,7 +143,7 @@ fun BottomNavigationBar(
                 } else {
                     Color.Black
                 },
-                unselectedContentColor = Color.Gray
+                unselectedContentColor = Color.Gray,
             )
         }
     }
@@ -153,24 +153,24 @@ fun BottomNavigationBar(
 fun AstrosList(
     paddingValues: PaddingValues,
     astrosViewModel: AstrosViewModel,
-    onItemClick: (String) -> Unit
+    onItemClick: (String) -> Unit,
 ) {
     val astrosList by astrosViewModel.peopleFlow.collectAsState(initial = listOf())
     Column(
-        modifier = Modifier.padding(paddingValues)
+        modifier = Modifier.padding(paddingValues),
     ) {
         ScreenTitle(
             title = AstroScreen.Astros.title,
             modifier = Modifier
-                .padding(20.dp)
+                .padding(20.dp),
         )
         LazyColumn(
-            modifier = Modifier.testTag(AstrosListTag)
+            modifier = Modifier.testTag(AstrosListTag),
         ) {
             items(astrosList) {
                 AstroItem(
                     people = it,
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
                 )
             }
         }
@@ -180,7 +180,7 @@ fun AstrosList(
 @Composable
 fun IssLocation(
     paddingValues: PaddingValues,
-    astrosViewModel: AstrosViewModel
+    astrosViewModel: AstrosViewModel,
 ) {
     val issNow by astrosViewModel.issNowFlow.collectAsState(initial = IssNow())
 
@@ -188,12 +188,12 @@ fun IssLocation(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         ScreenTitle(
             title = AstroScreen.IssPosition.title,
             modifier = Modifier
-                .padding(20.dp)
+                .padding(20.dp),
 
         )
         IssDetails(issNow = issNow)
